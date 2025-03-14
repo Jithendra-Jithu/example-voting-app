@@ -22,41 +22,6 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 sh '''
-                eval $(minikube docker-env) 
-                docker build -t vote-app:latest ./vote
-                docker build -t result-app:latest ./result
-                docker build -t worker-app:latest ./worker
-                '''
-            }
-        }
-
-        stage('Deploy to Minikube') {
-            steps {
-                sh '''
-                pipeline {
-    agent any
-
-    environment {
-        DOCKER_HUB_USER = 'your-dockerhub-username'
-        DOCKER_HUB_PASS = credentials('docker-hub-credentials')
-    }
-
-    stages {
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/your-repo-url.git'
-            }
-        }
-
-        stage('Build with Maven') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Build Docker Images') {
-            steps {
-                sh '''
                 eval $(minikube docker-env)
                 docker build -t vote-app:latest ./vote
                 docker build -t result-app:latest ./result
