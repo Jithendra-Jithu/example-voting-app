@@ -15,14 +15,15 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
-                sh 'mvn clean install'
+                // sh 'mvn clean install'
+                sh 'pwd'
             }
         }
 
         stage('Build Docker Images') {
             steps {
                 sh '''
-                eval $(minikube docker-env)
+                // eval $(minikube docker-env)
                 docker build -t vote-app:latest ./vote
                 docker build -t result-app:latest ./result
                 docker build -t worker-app:latest ./worker
