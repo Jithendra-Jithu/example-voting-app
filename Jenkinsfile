@@ -47,35 +47,6 @@ pipeline {
                 kubectl rollout status deployment/db-deployment
                 kubectl rollout status deployment/redis-deployment
                 kubectl rollout status deployment/result-deployment
-                kubectl rollout status deployment/vote-deployment
-                kubectl rollout status deployment/worker-deployment
-                '''
-            }
-        }
-    }
+                kubectl rollout status deployment/vote-de
 
-    post {
-        success {
-            echo "Deployment completed successfully."
-        }
-        failure {
-            echo "Deployment failed. Check logs for details."
-        }
-    }
-}
-
-                '''
-            }
-        }
-    }
-
-    post {
-        success {
-            echo "Deployment completed successfully."
-        }
-        failure {
-            echo "Deployment failed. Check logs for details."
-        }
-    }
-}
 
