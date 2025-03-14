@@ -8,13 +8,7 @@ pipeline {
             }
         }
 
-        stage('Build with Maven') {
-            steps {
-                sh '''
-                mvn clean install
-                '''
-            }
-        }
+        
 
         stage('Build Docker Images') {
             steps {
