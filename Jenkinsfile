@@ -26,7 +26,7 @@ pipeline {
                 docker build -t vote-app:latest ./vote
                 docker build -t result-app:latest ./result
                 docker build -t worker-app:latest ./worker
-                '''
+                '''  // Closing triple quote was missing here
             }
         }
 
@@ -47,6 +47,19 @@ pipeline {
                 kubectl rollout status deployment/db-deployment
                 kubectl rollout status deployment/redis-deployment
                 kubectl rollout status deployment/result-deployment
-                kubectl rollout status deployment/vote-de
+                kubectl rollout status deployment/vote-deployment
+                kubectl rollout status deployment/worker-deployment
+                '''  // Closing triple quote was missing here
+            }
+        }
+    }
 
-
+    post {
+        success {
+            echo "Deployment completed successfully."
+        }
+        failure {
+            echo "Deployment failed. Check logs for details."
+        }
+    }
+}
