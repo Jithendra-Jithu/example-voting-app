@@ -29,10 +29,10 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 sh '''
-                kubectl apply -f ./k8s-specifications/db-deployment.yaml
-                kubectl apply -f ./k8s-specifications/db-service.yaml
-                kubectl apply -f ./k8s-specifications/redis-deployment.yaml
-                kubectl apply -f ./k8s-specifications/redis-service.yaml
+                kubectl apply -f ./k8s-specifications/db-deployment.yaml --validate=false
+                kubectl apply -f ./k8s-specifications/db-service.yaml --validate=false
+                kubectl apply -f ./k8s-specifications/redis-deployment.yaml --validate=false
+                kubectl apply -f ./k8s-specifications/redis-service.yaml --validate=false
                 kubectl apply -f ./k8s-specifications/result-deployment.yaml
                 kubectl apply -f ./k8s-specifications/result-service.yaml
                 kubectl apply -f ./k8s-specifications/vote-deployment.yaml
