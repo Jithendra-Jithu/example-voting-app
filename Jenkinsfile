@@ -1,10 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_HUB_USER = 'jithu-145'
-        DOCKER_HUB_PASS = credentials('Jithendra@123')
-    }
+    
 
     stages {
         stage('Clone Repository') {
@@ -22,12 +19,10 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                sh '''
-                // eval $(minikube docker-env)
-                docker build -t vote-app:latest ./vote
-                docker build -t result-app:latest ./result
-                docker build -t worker-app:latest ./worker
-                '''  // Closing triple quote was missing here
+                sh 'docker build -t vote-app:latest ./vote'
+                sh 'docker build -t result-app:latest ./result'
+                sh 'docker build -t worker-app:latest ./worker'
+                  // Closing triple quote was missing here
             }
         }
 
@@ -55,12 +50,5 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            echo "Deployment completed successfully."
-        }
-        failure {
-            echo "Deployment failed. Check logs for details."
-        }
-    }
+    
 }
