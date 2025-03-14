@@ -4,7 +4,15 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/Jithendra-Jithu/example-voting-app.git', branch: 'main'
+                git 'https://github.com/Jithendra-Jithu/example-voting-app.git'
+            }
+        }
+
+        stage('Build with Maven') {
+            steps {
+                sh '''
+                mvn clean install
+                '''
             }
         }
 
@@ -14,7 +22,7 @@ pipeline {
                 docker build -t vote-app:latest ./vote
                 docker build -t result-app:latest ./result
                 docker build -t worker-app:latest ./worker
-                '''  // Closing triple quote added here
+                '''
             }
         }
 
@@ -37,7 +45,7 @@ pipeline {
                 kubectl rollout status deployment/result-deployment
                 kubectl rollout status deployment/vote-deployment
                 kubectl rollout status deployment/worker-deployment
-                '''  // Closing triple quote added here
+                '''
             }
         }
     }
